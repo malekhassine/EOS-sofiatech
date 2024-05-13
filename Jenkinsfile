@@ -4,10 +4,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            when {
-                changeset '**/*'
-            }
+        
             steps {
                 // Checkout the main repository using the new URL
                 checkout([
