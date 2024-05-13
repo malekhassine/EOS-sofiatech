@@ -24,13 +24,15 @@ pipeline {
   }
       
   
-       
-        stage('Build product microservice') {
-            steps {
-                sh "mvn -v"
-                sh "mvn clean install"
-            }
-
+    
+  stages {
+    stage('Build product microservice') {
+      steps {
+        sh "mvn -v"
+        sh "mvn clean install"
+      }
+    }
+  }
 }
 
   }
