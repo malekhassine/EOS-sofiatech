@@ -28,21 +28,23 @@ pipeline {
       }
     }
 
-   stage('Build') {
-  when {
-    expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
-  }
-   steps {
-        script {
-          // Build each microservice
-          for (def service in microservices) {
-            dir(service) {
-              // Execute Maven clean compile
-              sh 'mvn clean compile' // Changed from 'mvn clean install'
+  
+        stage('Build') {
+            when {
+                expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
             }
-          }
+            steps {
+                script {
+                    // Build each microservice using Maven
+                    for (def service in microservices) {
+                        dir(service) {
+                            sh 'mvn clean install'
+                        }
+                    }
+                }
+            }
         }
-      }
+
 }
 
   }
