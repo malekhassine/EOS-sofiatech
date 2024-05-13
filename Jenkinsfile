@@ -27,7 +27,7 @@ pipeline {
     expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
   }
   steps {
-    catchError(error: buildException) {
+   catchError(message: buildException) {
       script {
         withMaven(maven: 'maven') {
           for (def service in microservices) {
