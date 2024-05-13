@@ -1,15 +1,12 @@
-def microservices = ['ecomm-order']
+def microservices = ['ecomm-cart']
 
 pipeline {
   agent any
-  tools{
-    maven 'maven'
-    
-  }
+  tools{ maven 'maven'}
   
 
   environment {
-    DOCKERHUB_USERNAME = "malekhassine"
+    DOCKERHUB_USERNAME = "youssefrm"
     // Ensure Docker credentials are stored securely in Jenkins
   }
 
@@ -20,7 +17,7 @@ pipeline {
         checkout([
           $class: 'GitSCM',
           branches: [[name: env.BRANCH_NAME]], // Checkout the current branch
-          userRemoteConfigs: [[url: 'https://github.com/malekhassine/EOS-sofiatech.git']]
+          userRemoteConfigs: [[url: 'https://github.com/youssefrmili/Ecommerce-APP.git']]
         ])
       }
     }
@@ -32,12 +29,13 @@ pipeline {
       steps {
         script {
           // Build each microservice using Maven
-         
-        for (def service in microservices) {
-          dir(service) {
-            sh 'mvn clean install'
+          for (def service in microservices) {
+            dir(service) {
+              sh 'mvn clean install'
+            }
+          }
         }
       }
-    
+    }
   }
 }
