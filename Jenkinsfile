@@ -23,21 +23,12 @@ pipeline {
     }
       
   
-        stage('Build') {
-            when {
-                expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
-            }
+        stages {
+        stage('Build product microservice') {
             steps {
-                script {
-                    // Build each microservice using Maven
-                    for (def service in microservices) {
-                        dir(service) {
-                            sh 'mvn clean install'
-                        }
-                    }
-                }
+                sh "mvn -v"
+                sh "mvn clean install"
             }
-        }
 
 }
 
