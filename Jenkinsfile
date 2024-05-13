@@ -1,4 +1,4 @@
-def microservices = ['ecomm-cart', 'ecomm-product', 'ecomm-order', 'ecomm-web']
+def microservices = ['ecomm-web']
 
 pipeline {
     agent any
@@ -35,25 +35,7 @@ pipeline {
             }
         }
 
-        stage('Source Composition Analysis') {
-            when {
-                changeset '**/*'
-            }
-            steps {
-                script {
-                    for (def service in microservices) {
-                        dir(service) {
-                            sh 'rm owasp* || true'
-                            sh 'wget "https://raw.githubusercontent.com/youssefrmili/Ecommerce-APP/test/owasp-dependency-check.sh"'
-                            sh 'chmod +x owasp-dependency-check.sh'
-                            sh 'bash owasp-dependency-check.sh'
-                            sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
-                        }
-                    }
-                }
-            }
-        }
-
+       
         stage('Build') {
             when {
                 changeset "**/${service}/**"
