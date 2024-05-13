@@ -24,7 +24,7 @@ pipeline {
   }
       
   
-        stages {
+       
         stage('Build product microservice') {
             steps {
                 sh "mvn -v"
@@ -34,4 +34,4 @@ pipeline {
 }
 
   }
-}
+
