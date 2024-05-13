@@ -32,12 +32,12 @@ pipeline {
       steps {
         script {
           // Build each microservice using Maven
-          withMaven(maven: 'maven') {
+         
         for (def service in microservices) {
           dir(service) {
             sh 'mvn clean install'
         }
       }
-    }
+    
   }
 }
