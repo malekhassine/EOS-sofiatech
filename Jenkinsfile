@@ -4,7 +4,7 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_USERNAME = "youssefrm"
+    DOCKERHUB_USERNAME = "malekhassine"
     // Ensure Docker credentials are stored securely in Jenkins
   }
 
