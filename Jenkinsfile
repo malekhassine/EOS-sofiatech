@@ -2,6 +2,10 @@ def microservices = ['ecomm-order']
 
 pipeline {
   agent any
+  tools{
+    maven 'maven'
+  }
+  
 
   environment {
     DOCKERHUB_USERNAME = "malekhassine"
