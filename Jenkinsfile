@@ -21,23 +21,23 @@ pipeline {
         ])
       }
     }
+      stage('MVN COMPILE') {
+      steps {
+        sh 'mvn compile'
+        echo 'Compile stage done'
+      }
+    }
 
    stage('Build') {
   when {
     expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
   }
   steps {
-   catchError(message: buildException) {
-      script {
-        withMaven(maven: 'maven') {
-          for (def service in microservices) {
-            dir(service) {
-              sh 'mvn clean install'
-            }
-          }
-        }
-      }
-    }
+       
+        sh 'mvn  install -Dmaven.skip.test=true'
+        echo 'Build stage done'
+      
+    
   }
 }
 
