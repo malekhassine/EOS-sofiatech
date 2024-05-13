@@ -21,13 +21,7 @@ pipeline {
         ])
       }
     }
-      stage('MVN COMPILE') {
-      steps {
-        sh 'mvn compile'
-        echo 'Compile stage done'
-      }
-    }
-
+      
   
         stage('Build') {
             when {
