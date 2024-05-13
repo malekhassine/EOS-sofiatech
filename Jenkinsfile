@@ -1,4 +1,4 @@
-def microservices = ['ecomm-cart']
+def microservices = ['ecomm-order']
 
 pipeline {
   agent any
@@ -6,7 +6,7 @@ pipeline {
   
 
   environment {
-    DOCKERHUB_USERNAME = "youssefrm"
+    DOCKERHUB_USERNAME = "malekhassine"
     // Ensure Docker credentials are stored securely in Jenkins
   }
 
@@ -17,7 +17,7 @@ pipeline {
         checkout([
           $class: 'GitSCM',
           branches: [[name: env.BRANCH_NAME]], // Checkout the current branch
-          userRemoteConfigs: [[url: 'https://github.com/youssefrmili/Ecommerce-APP.git']]
+          userRemoteConfigs: [[url: 'https://github.com/malekhassine/EOS-sofiatech.git']]
         ])
       }
     }
