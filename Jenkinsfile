@@ -22,13 +22,14 @@ pipeline {
       }
     }
 
-    stage('Build') {
-      when {
-        expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
-      }
-      steps {
-        script {
-          // Build each microservice using Maven
+   stage('Build') {
+  when {
+    expression { (env.BRANCH_NAME == 'dev') || (env.BRANCH_NAME == 'test') || (env.BRANCH_NAME == 'master') }
+  }
+  steps {
+    catchError(error: buildException) {
+      script {
+        withMaven(maven: 'maven') {
           for (def service in microservices) {
             dir(service) {
               sh 'mvn clean install'
@@ -37,5 +38,8 @@ pipeline {
         }
       }
     }
+  }
+}
+
   }
 }
